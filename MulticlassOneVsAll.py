@@ -55,11 +55,12 @@ def oneVsAllPerceptronExample():
             [3, 2, 0], [5, 1, 1], [5, 2, 1], [6, 2, 1], [6, 3, 1], [6, 5, 1]]
 
     x, t = Initializing.processData(data)  # iz pocetnog skupa podataka razdvojimo podatke i labele
-    Plot.plotData(x, t)  # nacrtamo podatke
+    #Plot.plotData(x, t)  # nacrtamo podatke
     w, b = trainClassifiers(x, t, "perceptron")
 
-    Plot.plotLinesMulticlassOneVsAll(x, t, w, b)
-    plt.show()
+    fig = Plot.plotLinesMulticlassOneVsAll(x, t, w, b)
+    return fig
+    #plt.show()
 
 #oneVsAllLogisticRegressionExample()
 #oneVsAllPerceptronExample()

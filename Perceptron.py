@@ -55,4 +55,4 @@ def perceptronPlotInWindow():
     fig = Plot.plotInWindow(x, w, b, t)
     return fig
 
-#perceptronExample()
+perceptronExample()

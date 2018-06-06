@@ -22,7 +22,7 @@ def plotData(x, t):
 def lineCoordinates(x, w, b):
     xMax = max(x[:][:, 0])
     xMin = min(x[:][:, 0])
-    xCord = [xMin,xMax]  # zelim da hiperravan bude dovoljno duga i deli podatke od prvog do poslenjeg postojeceg podatka
+    xCord = [xMin-1,xMax+1]  # zelim da hiperravan bude dovoljno duga i deli podatke od prvog do poslenjeg postojeceg podatka
     yCord = [-(w[0, 0] / w[0, 1]) * x - (b[0, 0] / w[0, 1]) for x in xCord]  # odredimo y koordinate za prethodno odredjene x koordinate
     return [xCord, yCord]
 
@@ -33,7 +33,10 @@ def plotLine(x, w, b):
 def plotLinesMulticlassOneVsAll(x, t, w, b):
     labels = np.unique(t)
     for i in range(len(labels)):
-        plotLine(x, w[i], b[i])
+        a, fig = plotLineInWindow(x, w[i], b[i])
+        plotDataInWindow(x, t, a, fig)
+    return fig
+        #plotLine(x, w[i], b[i])
 
 def plotInWindow(x, w, b, t):
     a, fig = plotLineInWindow(x, w, b)

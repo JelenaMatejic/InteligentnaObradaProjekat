@@ -39,7 +39,7 @@ def logisticRegressionExample():
     Plot.plotLine(x, w, b) # crtanje hiperravni
     plt.show()
 
-def perceptronPlotInWindow():
+def logisticRegressionPlotInWindow():
     data = ReadingFromFile.readDataFromFile("LogisticRegressionDataSet.txt", ',')
     trainingSet, testSet, validSet = CrossValidation.makeSets(data)
     x, t = Initializing.processData(trainingSet)
