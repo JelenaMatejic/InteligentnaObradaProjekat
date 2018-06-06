@@ -33,7 +33,7 @@ def predict(testSet, w, b):
     return predictSet
 
 def perceptronExample():
-    data = ReadingFromFile.readDataFromFile('C:/Users/Jelena/Desktop/PerceptronDataSet.txt', ',')
+    data = ReadingFromFile.readDataFromFile('PerceptronDataSet.txt', ',')
     trainingSet, testSet, validSet = CrossValidation.makeSets(data)
     x, t = Initializing.processData(data)
     w, b = Initializing.initialParam(x)

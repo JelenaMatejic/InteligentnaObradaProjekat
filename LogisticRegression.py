@@ -1,3 +1,4 @@
+import ReadingFromFile
 import Initializing
 import Plot
 import numpy as np
@@ -29,8 +30,7 @@ def predict(new_x, w, b):
     return out
 
 def logisticRegressionExample():
-    data = [[4, 2, 1], [1, 1, 0], [2, 2, 0], [2, 3, 0], [3, 2, 0], [5, 1, 1], [5, 2, 1], [6, 2, 1], [6, 3, 1],
-            [6, 6, 1]]
+    data = ReadingFromFile.readDataFromFile("LogisticRegressionDataSet.txt", ',')
     x, t = Initializing.processData(data) # izdvajanje x i t iz skupa data
     w, b = Initializing.initialParam(x) # pocetne vrednosti za w i b
     Plot.plotData(x, t) # crtanje podataka iz skupa data
@@ -38,4 +38,4 @@ def logisticRegressionExample():
     Plot.plotLine(x, w, b) # crtanje hiperravni
     plt.show()
 
-#logisticRegressionExample()
+logisticRegressionExample()
