@@ -46,4 +46,13 @@ def perceptronExample():
     print(cost(xTest,tTest,w,b))
     plt.show()
 
-perceptronExample()
+def perceptronPlotInWindow():
+    data = ReadingFromFile.readDataFromFile('PerceptronDataSet.txt', ',')
+    trainingSet, testSet, validSet = CrossValidation.makeSets(data)
+    x, t = Initializing.processData(trainingSet)
+    w, b = Initializing.initialParam(x)
+    w, b = train(x, t, w, b)
+    fig = Plot.plotInWindow(x, w, b, t)
+    return fig
+
+#perceptronExample()

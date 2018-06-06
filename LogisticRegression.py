@@ -38,4 +38,4 @@ def logisticRegressionExample():
     Plot.plotLine(x, w, b) # crtanje hiperravni
     plt.show()
 
-logisticRegressionExample()
+#logisticRegressionExample()
