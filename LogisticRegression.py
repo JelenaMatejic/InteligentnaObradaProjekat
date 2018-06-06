@@ -1,6 +1,7 @@
 import ReadingFromFile
 import Initializing
 import Plot
+import CrossValidation
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -12,7 +13,7 @@ def output(x, w, b):
     a = np.dot(w,x.T)+b
     return sigmoid(a)
 
-def trein(w, b, x, t, epoha = 1000, learnRate = 0.1):
+def train(x, t, w, b, epoha = 1000, learnRate = 0.1):
     for e in range(epoha):
         for n in range(len(x)):
             w = w - learnRate * (output(x[n], w, b) - t[0,n]) * x[n].T
@@ -34,8 +35,17 @@ def logisticRegressionExample():
     x, t = Initializing.processData(data) # izdvajanje x i t iz skupa data
     w, b = Initializing.initialParam(x) # pocetne vrednosti za w i b
     Plot.plotData(x, t) # crtanje podataka iz skupa data
-    w, b = trein(w, b, x, t) # treniranje modela
+    w, b = train(w, t, w, b) # treniranje modela
     Plot.plotLine(x, w, b) # crtanje hiperravni
     plt.show()
+
+def perceptronPlotInWindow():
+    data = ReadingFromFile.readDataFromFile("LogisticRegressionDataSet.txt", ',')
+    trainingSet, testSet, validSet = CrossValidation.makeSets(data)
+    x, t = Initializing.processData(trainingSet)
+    w, b = Initializing.initialParam(x)
+    w, b = train(x, t, w, b)
+    fig = Plot.plotInWindow(x, w, b, t)
+    return fig
 
 #logisticRegressionExample()

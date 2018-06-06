@@ -3,9 +3,7 @@ import Plot
 import sys
 import matplotlib
 matplotlib.use('TkAgg')
-import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
 from tkinter import *
 
 
@@ -18,10 +16,18 @@ class windowClass:
     def __init__(self,  window):
         self.window = window
         self.box = Entry(window)
-        self.buttonPerceptron = Button (window, text="Perceptron", command=self.plot)
+        self.buttonPerceptron = Button (window, text="Perceptron", command=self.plotPerceptron)
+        self.buttonLogisticRegression = Button (window, text="Logistic Regression", command=self.plotLogisticRegression)
         self.buttonPerceptron.pack()
+        self.buttonLogisticRegression.pack()
 
-    def plot (self):
+    def plotPerceptron (self):
+        fig = Perceptron.perceptronPlotInWindow()
+        canvas = FigureCanvasTkAgg(fig, master=self.window)
+        canvas.get_tk_widget().pack()
+        canvas.draw()
+
+    def plotLogisticRegression(self):
         fig = Perceptron.perceptronPlotInWindow()
         canvas = FigureCanvasTkAgg(fig, master=self.window)
         canvas.get_tk_widget().pack()

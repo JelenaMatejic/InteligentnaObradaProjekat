@@ -43,8 +43,9 @@ def plotInWindow(x, w, b, t):
 def plotLineInWindow(x, w, b):
     xCord, yCord = lineCoordinates(x, w, b)
 
-    dim = xCord[1] - xCord[0] + 1
-    fig = Figure(figsize=(dim, dim))
+    #dim = xCord[1] - xCord[0] + 1
+    #fig = Figure(figsize=(dim, dim))
+    fig = Figure()
     a = fig.add_subplot(111)
     a.plot(xCord, yCord)
     return [a, fig]
@@ -53,6 +54,8 @@ def plotDataInWindow(x, t, a, fig):
     #izdvojimo sve moguce klase koje imamo (tj. izdvojimo sve razlicite labele)
     classes = np.unique(t)
     markers = listOfMarkers()
+
+    plt.draw()
     # idemo po klasama i iscrtavamo podatke - podaci jedne klase imaju nasumicno odabranu boju i oblik (marker)
     for i in classes:
         a.scatter(x.T[0][t[0] == i], x.T[1][t[0] == i], marker=random.choice(markers))
