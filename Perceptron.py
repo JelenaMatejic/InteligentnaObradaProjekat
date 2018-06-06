@@ -1,3 +1,4 @@
+import CrossValidation
 import Initializing
 import Plot
 import matplotlib.pyplot as plt
@@ -32,8 +33,9 @@ def predict(testSet, w, b):
 
 def perceptronExample():
     data = [[4, 2, 1],[1, 1, -1], [2, 2, -1], [2, 3, -1], [3, 2, -1], [5, 1, 1], [5, 2, 1], [6, 2, 1], [6, 3, 1], [6, 6, 1]]
-    testSet = [[1, 1, -1], [1.3, 1.2, -1], [2, 1, -1], [1.3, 2, -1], [3, 1, 1], [4, 1, 1], [4, 2, 1], [3, 3.3, 1]]
-    x, t = Initializing.processData(data)
+    # testSet = [[1, 1, -1], [1.3, 1.2, -1], [2, 1, -1], [1.3, 2, -1], [3, 1, 1], [4, 1, 1], [4, 2, 1], [3, 3.3, 1]]
+    trainingSet, testSet, validSet = CrossValidation.makeSets(data)
+    x, t = Initializing.processData(trainingSet)
     w, b = Initializing.initialParam(x)
     Plot.plotData(x, t)
     w, b = train(x, t, w, b)
@@ -44,4 +46,4 @@ def perceptronExample():
     print(cost(xTest,tTest,w,b))
     plt.show()
 
-#perceptronExample()
+perceptronExample()
