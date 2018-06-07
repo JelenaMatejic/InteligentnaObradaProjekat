@@ -30,6 +30,7 @@ def trainClassifiers(x, t, algorithm):
         tmpT = processDataPerClass(t, labels[i], algorithm)
         w, b = Initializing.initialParam(x)
         if algorithm == 'perceptron':
+
             w, b = Perceptron.train(x, tmpT, w, b)
         else:
             w, b = LogisticRegression.trein(w, b, x, tmpT)
