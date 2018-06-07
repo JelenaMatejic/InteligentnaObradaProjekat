@@ -16,29 +16,46 @@ from matplotlib.figure import Figure
 class windowClass:
 
     def __init__(self,  window):
+        self.canvas = None
         self.window = window
         self.box = Entry(window)
         self.buttonPerceptron = Button (window, text="Perceptron", command=self.plotPerceptron)
         self.buttonLogisticRegression = Button (window, text="Logistic Regression", command=self.plotLogisticRegression)
         self.buttonMulticlassOneVsAllPerceptron = Button(window, text="One Vs All - Perceptron", command=self.plotMulticlassOneVsAllPerceptron)
+        self.buttonMulticlassOneVsAllLogisticRegression = Button(window, text="One Vs All - Logistic Regression",
+                                                                 command=self.plotMulticlassOneVsAllLogisticRegression)
         self.buttonPerceptron.pack()
         self.buttonLogisticRegression.pack()
         self.buttonMulticlassOneVsAllPerceptron.pack()
+        self.buttonMulticlassOneVsAllLogisticRegression.pack()
 
     def plotPerceptron (self):
         fig = Perceptron.perceptronPlotInWindow()
-        canvas = FigureCanvasTkAgg(fig, master=self.window)
-        canvas.get_tk_widget().pack()
-        canvas.draw()
+        self.drawFigure(fig)
+
+    def drawFigure(self, fig):
+        if self.canvas is None:
+            self.canvas = FigureCanvasTkAgg(fig, master=self.window)
+            self.canvas.get_tk_widget().pack()
+            self.canvas.draw()
+        else:
+            self.canvas.get_tk_widget().destroy()
+            self.canvas = FigureCanvasTkAgg(fig, master=self.window)
+            self.canvas.get_tk_widget().pack()
+            self.canvas.draw()
 
     def plotLogisticRegression(self):
         fig = LogisticRegression.logisticRegressionPlotInWindow()
+        self.drawFigure(fig)
+
+    def plotMulticlassOneVsAllPerceptron(self):
+        fig = MulticlassOneVsAll.oneVsAllPerceptronExample()
         canvas = FigureCanvasTkAgg(fig, master=self.window)
         canvas.get_tk_widget().pack()
         canvas.draw()
 
-    def plotMulticlassOneVsAllPerceptron(self):
-        fig = MulticlassOneVsAll.oneVsAllPerceptronExample()
+    def plotMulticlassOneVsAllLogisticRegression(self):
+        fig = MulticlassOneVsAll.oneVsAllLogisticRegressionExample()
         canvas = FigureCanvasTkAgg(fig, master=self.window)
         canvas.get_tk_widget().pack()
         canvas.draw()
