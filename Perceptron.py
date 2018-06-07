@@ -75,12 +75,14 @@ def perceptronExample():
     plt.show()
 
 def perceptronPlotInWindow():
-    data = ReadingFromFile.readDataFromFile('PerceptronDataSet.txt', ',')
-    trainingSet, testSet, validSet = CrossValidation.makeSets(data)
-    x, t = Initializing.processData(trainingSet)
-    w, b = Initializing.initialParam(x)
-    w, b = train(x, t, w, b)
+    data = ReadingFromFile.readDataFromFile('PerceptronDataSet.txt', ',')  # Podaci ucitani iz fajla
+    trainingSet, testSet = CrossValidation.makeSets(data)  # Napravimo trening i test set
+    kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet, 5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
+
+    w, b = crossTrain(kTrainingSets, kValidSets)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
+    x, t = Initializing.processData(testSet)  # Rezultat crtamo i merimo nad test skupom podataka
+
     fig = Plot.plotInWindow(x, w, b, t)
     return fig
 
-perceptronExample()
+#perceptronExample()
