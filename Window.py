@@ -20,10 +20,8 @@ class windowClass:
         self.canvas = None
         self.window = window
         self.box = Entry(window)
-        # self.filename = filedialog.askopenfilename(initialdir="/", title="Select file",
-        #                                              filetypes=(("jpeg files", "*.jpg"), ("all files", "*.*")))
         self.labelForFile = Label(window, text = "No file chosen . . .", bg = "white", height=1, width=50,  anchor="e")
-        self.buttonChooseFile = Button(window, text="Choose Fle")
+        self.buttonChooseFile = Button(window, text="Choose Fle", command=self.openFileDialog)
         self.buttonPerceptron = Button (window, text="Perceptron Algorithm", command=self.plotPerceptron, height = 1, width = 50)
         self.buttonLogisticRegression = Button (window, text="Logistic Regression Algorithm", command=self.plotLogisticRegression, height = 1, width = 50)
         self.buttonPassiveAggressive = Button (window, text="Passive Aggressive Algorithm", command=self.plotLogisticRegression, height = 1, width = 50)
@@ -32,6 +30,8 @@ class windowClass:
                                                                  command=self.plotMulticlassOneVsAllLogisticRegression, height = 1, width = 50)
         self.buttonPassiveAggressiveOneVsAllLogisticRegression = Button(window, text="One Vs All - Logistic Regression algorithm",
                                                                  command=self.plotMulticlassOneVsAllLogisticRegression, height=1, width=50)
+        self.labelTitle = Label(window, text = "", bg = "white")
+
         self.labelForFile.grid(row=0, column=0)
         self.buttonChooseFile.grid(row=0, column=1, sticky=W)
         self.buttonPerceptron.grid(row=1, column=0)
@@ -40,24 +40,38 @@ class windowClass:
         self.buttonMulticlassOneVsAllPerceptron.grid(row=1, column=1)
         self.buttonMulticlassOneVsAllLogisticRegression.grid(row=2, column=1)
         self.buttonPassiveAggressiveOneVsAllLogisticRegression.grid(row=3, column=1)
+        self.labelTitle.grid(row=4, columnspan=2)
 
-    def plotPerceptron (self):
-        fig = Perceptron.perceptronPlotInWindow()
-        self.drawFigure(fig)
+    def openFileDialog (self):
+        self.filename = filedialog.askopenfilename(initialdir="/", title="Select file",
+                                                     filetypes=(("txt files", "*.txt"), ("all files", "*.*")))
+        self.labelForFile['text'] = self.filename
 
     def drawFigure(self, fig):
         if self.canvas is None:
             self.canvas = FigureCanvasTkAgg(fig, master=self.window)
-            self.canvas.get_tk_widget().grid(row = 4, columnspan=2)
+            self.canvas.get_tk_widget().grid(row = 5, columnspan=2)
             self.canvas.draw()
         else:
             self.canvas.get_tk_widget().destroy()
             self.canvas = FigureCanvasTkAgg(fig, master=self.window)
-            self.canvas.get_tk_widget().grid(row = 4, columnspan=2)
+            self.canvas.get_tk_widget().grid(row = 5, columnspan=2)
             self.canvas.draw()
 
+    def plotPerceptron (self):
+        file = self.labelForFile["text"]
+        self.labelTitle["text"] = "Perceptron Algorithm"
+        if file == "" or file == "No file chosen . . .":
+            file = "PerceptronDataSet.txt"
+        fig = Perceptron.perceptronPlotInWindow(file)
+        self.drawFigure(fig)
+
     def plotLogisticRegression(self):
-        fig = LogisticRegression.logisticRegressionPlotInWindow()
+        file = self.labelForFile["text"]
+        self.labelTitle["text"] = "Logistic Regression Algorithm"
+        if file == "" or file == "No file chosen . . .":
+            file = "LogisticRegressionDataSet.txt"
+        fig = LogisticRegression.logisticRegressionPlotInWindow(file)
         self.drawFigure(fig)
 
     def plotMulticlassOneVsAllPerceptron(self):
@@ -77,7 +91,5 @@ windowClass (window)
 window.geometry("720x600")
 window.configure(background='white')
 window.title("Classifiers")
-#filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
-#print(filename)
 window.mainloop()
 window.quit()

@@ -74,8 +74,8 @@ def perceptronExample():
     Plot.plotLine(x, w, b)
     plt.show()
 
-def perceptronPlotInWindow():
-    data = ReadingFromFile.readDataFromFile('PerceptronDataSet.txt', ',')  # Podaci ucitani iz fajla
+def perceptronPlotInWindow(file):
+    data = ReadingFromFile.readDataFromFile(file, ',')  # Podaci ucitani iz fajla
     trainingSet, testSet = CrossValidation.makeSets(data)  # Napravimo trening i test set
     kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet, 5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
 
