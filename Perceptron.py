@@ -28,15 +28,17 @@ def cost(x, t, w, b):
     return np.sum(loss)
 
 def predict(testSet, w, b):
-    predictSet = np.dot(w,testSet.T) + b
+    xTest, tTest = Initializing.processData(testSet)
+    predictSet = np.dot(w,xTest.T) + b
     predictSet[predictSet > 0] = 1
     predictSet[predictSet <= 0] = -1
     return predictSet
 
-def perceptronExample():
-    data = ReadingFromFile.readDataFromFile('PerceptronDataSet.txt', ',') # Podaci ucitani iz fajla
+def perceptronExample(file):
+    data = ReadingFromFile.readDataFromFile(file, ',') # Podaci ucitani iz fajla
+    trainingSet, testSet = CrossValidation.makeSets(data)
 
-    x, t = Initializing.processData(data)
+    x, t = Initializing.processData(trainingSet)
     w, b = Initializing.initialParam(x)
     w, b = train(x, t, w, b)
     Plot.plotData(x, t)
@@ -46,10 +48,14 @@ def perceptronExample():
 
 def perceptronPlotInWindow(file):
     data = ReadingFromFile.readDataFromFile(file, ',')  # Podaci ucitani iz fajla
-    x, t = Initializing.processData(data)
+    trainingSet, testSet = CrossValidation.makeSets(data)
+
+    x, t = Initializing.processData(trainingSet)
     w, b = Initializing.initialParam(x)
     w, b = train(x, t, w, b)
-    fig = Plot.plotInWindow(x, w, b, t)
+
+    xTest, tTest = Initializing.processData(testSet)
+    fig = Plot.plotInWindow(xTest, w, b, tTest)
     return fig
 
-#perceptronExample()
+perceptronExample("PerceptronDataSet.txt")
