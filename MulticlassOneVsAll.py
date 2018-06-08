@@ -33,13 +33,13 @@ def trainClassifiers(x, t, algorithm):
         if algorithm == 'perceptron':
             w, b = Perceptron.train(x, tmpT, w, b)
         else:
-            w, b = LogisticRegression.trein(x, tmpT, w, b)
+            w, b = LogisticRegression.train(x, tmpT, w, b)
         listW.append(np.array(w[0]).reshape(1,len(w[0])))
         listB.append(np.array(b[0]).reshape(1,1))
     return [listW, listB]
 
-def oneVsAllPerceptronExample():
-    data = ReadingFromFile.readDataFromFile('MulticlassOneVsAllDataSet.txt', ',')
+def oneVsAllPerceptronExample(file):
+    data = ReadingFromFile.readDataFromFile(file, ',')
 
     x, t = Initializing.processData(data)  # iz pocetnog skupa podataka razdvojimo podatke i labele
     listW, listB = trainClassifiers(x, t, "perceptron")
@@ -47,27 +47,14 @@ def oneVsAllPerceptronExample():
     fig = Plot.plotLinesMulticlassOneVsAll(x, t, listW, listB)
     return fig
 
-def oneVsAllLogisticRegressionExample():
-    data = [[3.4, 5.9, 2], [2.7, 7.9, 2], [3.8, 7.8, 2], [3, 6, 2], [3.5, 8, 2],
-            [3.7, 7.5, 2], [4, 2, 1], [1, 1, 0], [2, 2, 0], [1, 3, 0], [2.7, 2.4, 0],
-            [3, 2, 0], [5, 1, 1], [5, 2, 1], [6, 2, 1], [6, 3, 1], [6, 5, 1]]
+def oneVsAllLogisticRegressionExample(file):
+    data = ReadingFromFile.readDataFromFile('./dataSets/MulticlassOneVsAllDataSet.txt', ',')
 
     x, t = Initializing.processData(data)  # iz pocetnog skupa podataka razdvojimo podatke i labele
-    w, b = trainClassifiers(x, t, "logistic")
+    listW, listB = trainClassifiers(x, t, "logistic")
 
-    fig = Plot.plotLinesMulticlassOneVsAll(x, t, w, b)
+    fig = Plot.plotLinesMulticlassOneVsAll(x, t, listW, listB)
     return fig
-
-    data = ReadingFromFile.readDataFromFile(file, ',')  # Podaci ucitani iz fajla
-    trainingSet, testSet = CrossValidation.makeSets(data)  # Napravimo trening i test set
-    kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet, 5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
-
-    w, b = crossTrain(kTrainingSets, kValidSets)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
-    x, t = Initializing.processData(testSet)  # Rezultat crtamo i merimo nad test skupom podataka
-
-    fig = Plot.plotInWindow(x, w, b, t)
-    return fig
-
 
 #oneVsAllLogisticRegressionExample()
 #oneVsAllPerceptronExample()

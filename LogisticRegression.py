@@ -55,6 +55,7 @@ def crossTrain(kTrainingSets, kValidSets):
         # Merino gresku na k-tom validacionom set-u, za dobijene parametre w i t
         xValid, tValid = Initializing.processData(kValidSets[k])
         kLoss = cost(xValid, tValid, w, b)
+        #print(kLoss)
         minCost(w, b, kLoss)
 
     # Nakon unakrsnog treninga i validacije, vratimo najbolje parametra w i b, nad kojima cemo testirati
@@ -62,7 +63,7 @@ def crossTrain(kTrainingSets, kValidSets):
     return [bestW, bestB]
 
 def logisticRegressionExample():
-    data = ReadingFromFile.readDataFromFile('LogisticRegressionDataSet.txt', ',')  # Podaci ucitani iz fajla
+    data = ReadingFromFile.readDataFromFile('./dataSets/LogisticRegressionDataSet.txt', ',')  # Podaci ucitani iz fajla
     trainingSet, testSet = CrossValidation.makeSets(data)  # Napravimo trening i test set
     kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet, 5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
 

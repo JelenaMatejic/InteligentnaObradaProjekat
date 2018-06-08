@@ -34,5 +34,5 @@ def kCrossValidationMakeSets(trainingSet, k):
 
     return [kTrainingSets, kValidSets]
 
-data = ReadingFromFile.readDataFromFile('PerceptronDataSet.txt', ',')
-kCrossValidationMakeSets(data, 3)
+#data = ReadingFromFile.readDataFromFile("./dataSets/PerceptronDataSet.txt", ',')
+#kCrossValidationMakeSets(data, 3)

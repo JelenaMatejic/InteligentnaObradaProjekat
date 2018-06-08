@@ -64,7 +64,7 @@ class windowClass:
         file = self.labelForFile["text"]
         self.labelTitle["text"] = "Perceptron Algorithm"
         if file == "" or file == "No file chosen . . .":
-            file = "PerceptronDataSet.txt"
+            file = "./dataSets/PerceptronDataSet.txt"
         fig = Perceptron.perceptronPlotInWindow(file)
         self.drawFigure(fig)
 
@@ -73,20 +73,28 @@ class windowClass:
         file = self.labelForFile["text"]
         self.labelTitle["text"] = "Logistic Regression Algorithm"
         if file == "" or file == "No file chosen . . .":
-            file = "LogisticRegressionDataSet.txt"
+            file = "./dataSets/LogisticRegressionDataSet.txt"
         fig = LogisticRegression.logisticRegressionPlotInWindow(file)
         self.drawFigure(fig)
 
     def plotMulticlassOneVsAllPerceptron(self):
         Plot.fig = Figure()
-        fig = MulticlassOneVsAll.oneVsAllPerceptronExample()
+        file = self.labelForFile["text"]
+        self.labelTitle["text"] = "Multiclass One Vs ALL - Perceptron Algorithm"
+        if file == "" or file == "No file chosen . . .":
+            file = "./dataSets/MulticlassOneVsAllDataSet.txt"
+        fig = MulticlassOneVsAll.oneVsAllPerceptronExample(file)
         canvas = FigureCanvasTkAgg(fig, master=self.window)
         canvas.get_tk_widget().grid(row = 5, columnspan=2)
         canvas.draw()
 
     def plotMulticlassOneVsAllLogisticRegression(self):
         Plot.fig = Figure()
-        fig = MulticlassOneVsAll.oneVsAllLogisticRegressionExample()
+        file = self.labelForFile["text"]
+        self.labelTitle["text"] = "Multiclass One Vs ALL -Logistic Regression Algorithm"
+        if file == "" or file == "No file chosen . . .":
+            file = "./dataSets/MulticlassOneVsAllDataSet.txt"
+        fig = MulticlassOneVsAll.oneVsAllLogisticRegressionExample(file)
         canvas = FigureCanvasTkAgg(fig, master=self.window)
         canvas.get_tk_widget().grid(row = 5, columnspan=2)
         canvas.draw()

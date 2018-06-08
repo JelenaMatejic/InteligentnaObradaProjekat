@@ -58,4 +58,4 @@ def perceptronPlotInWindow(file):
     fig = Plot.plotInWindow(xTest, w, b, tTest)
     return fig
 
-#perceptronExample("PerceptronDataSet.txt")
+#perceptronExample(""./dataSets/PerceptronDataSet.txt"")
