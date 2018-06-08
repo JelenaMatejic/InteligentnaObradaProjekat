@@ -4,6 +4,9 @@ import random
 import numpy as np
 from matplotlib.figure import Figure
 
+fig = Figure()
+a = fig.add_subplot(111)
+
 def listOfMarkers():
     # izdvojimo sve moguce markere
     markers = []
@@ -30,15 +33,18 @@ def plotLine(x, w, b):
     xCord, yCord = lineCoordinates(x, w, b)
     plt.plot(xCord, yCord)
 
-def plotLinesMulticlassOneVsAll(x, t, w, b):
+def plotLinesMulticlassOneVsAll(x, t, listW, listB):
     labels = np.unique(t)
     for i in range(len(labels)):
-        a, fig = plotLineInWindow(x, w[i], b[i])
-        plotDataInWindow(x, t, a, fig)
+        plotLineInWindow(x, listW[i], listB[i])
+    global a
+    global fig
+    plotDataInWindow(x, t, a, fig)
     return fig
-        #plotLine(x, w[i], b[i])
 
 def plotInWindow(x, w, b, t):
+    global a
+    global fig
     a, fig = plotLineInWindow(x, w, b)
     plotDataInWindow(x, t, a, fig)
     return fig
@@ -46,9 +52,8 @@ def plotInWindow(x, w, b, t):
 def plotLineInWindow(x, w, b):
     xCord, yCord = lineCoordinates(x, w, b)
 
-    #dim = xCord[1] - xCord[0] + 1
-    #fig = Figure(figsize=(dim, dim))
-    fig = Figure()
+    global fig
+    global a
     a = fig.add_subplot(111)
     a.plot(xCord, yCord)
     return [a, fig]

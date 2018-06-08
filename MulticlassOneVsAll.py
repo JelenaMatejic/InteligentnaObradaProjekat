@@ -42,9 +42,9 @@ def oneVsAllPerceptronExample():
     data = ReadingFromFile.readDataFromFile('MulticlassOneVsAllDataSet.txt', ',')
 
     x, t = Initializing.processData(data)  # iz pocetnog skupa podataka razdvojimo podatke i labele
-    w, b = trainClassifiers(x, t, "perceptron")
+    listW, listB = trainClassifiers(x, t, "perceptron")
 
-    fig = Plot.plotLinesMulticlassOneVsAll(x, t, w, b)
+    fig = Plot.plotLinesMulticlassOneVsAll(x, t, listW, listB)
     return fig
 
 def oneVsAllLogisticRegressionExample():

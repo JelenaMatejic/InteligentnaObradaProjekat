@@ -57,8 +57,10 @@ class windowClass:
             self.canvas = FigureCanvasTkAgg(fig, master=self.window)
             self.canvas.get_tk_widget().grid(row = 5, columnspan=2)
             self.canvas.draw()
+        Plot.fig = Figure()
 
     def plotPerceptron (self):
+        Plot.fig = Figure()
         file = self.labelForFile["text"]
         self.labelTitle["text"] = "Perceptron Algorithm"
         if file == "" or file == "No file chosen . . .":
@@ -67,6 +69,7 @@ class windowClass:
         self.drawFigure(fig)
 
     def plotLogisticRegression(self):
+        Plot.fig = Figure()
         file = self.labelForFile["text"]
         self.labelTitle["text"] = "Logistic Regression Algorithm"
         if file == "" or file == "No file chosen . . .":
@@ -75,12 +78,14 @@ class windowClass:
         self.drawFigure(fig)
 
     def plotMulticlassOneVsAllPerceptron(self):
+        Plot.fig = Figure()
         fig = MulticlassOneVsAll.oneVsAllPerceptronExample()
         canvas = FigureCanvasTkAgg(fig, master=self.window)
         canvas.get_tk_widget().grid(row = 5, columnspan=2)
         canvas.draw()
 
     def plotMulticlassOneVsAllLogisticRegression(self):
+        Plot.fig = Figure()
         fig = MulticlassOneVsAll.oneVsAllLogisticRegressionExample()
         canvas = FigureCanvasTkAgg(fig, master=self.window)
         canvas.get_tk_widget().grid(row = 5, columnspan=2)
