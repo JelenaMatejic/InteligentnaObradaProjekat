@@ -24,10 +24,10 @@ class windowClass:
         self.buttonMulticlassOneVsAllPerceptron = Button(window, text="One Vs All - Perceptron", command=self.plotMulticlassOneVsAllPerceptron)
         self.buttonMulticlassOneVsAllLogisticRegression = Button(window, text="One Vs All - Logistic Regression",
                                                                  command=self.plotMulticlassOneVsAllLogisticRegression)
-        self.buttonPerceptron.pack()
-        self.buttonLogisticRegression.pack()
-        self.buttonMulticlassOneVsAllPerceptron.pack()
-        self.buttonMulticlassOneVsAllLogisticRegression.pack()
+        self.buttonPerceptron.grid(row=1, column=0)
+        self.buttonLogisticRegression.grid(row=2, column=0)
+        self.buttonMulticlassOneVsAllPerceptron.grid(row=3, column=0)
+        self.buttonMulticlassOneVsAllLogisticRegression.grid(row=4, column=0)
 
     def plotPerceptron (self):
         fig = Perceptron.perceptronPlotInWindow()
@@ -36,12 +36,12 @@ class windowClass:
     def drawFigure(self, fig):
         if self.canvas is None:
             self.canvas = FigureCanvasTkAgg(fig, master=self.window)
-            self.canvas.get_tk_widget().pack()
+            self.canvas.get_tk_widget().grid(row = 0, column = 1)
             self.canvas.draw()
         else:
             self.canvas.get_tk_widget().destroy()
             self.canvas = FigureCanvasTkAgg(fig, master=self.window)
-            self.canvas.get_tk_widget().pack()
+            self.canvas.get_tk_widget().grid(row = 0, column = 1)
             self.canvas.draw()
 
     def plotLogisticRegression(self):
@@ -62,6 +62,8 @@ class windowClass:
 
 window= Tk()
 windowClass (window)
-window.geometry("500x500")
+window.geometry("800x500")
+window.configure(background='white')
 window.title("Classifiers")
 window.mainloop()
+window.quit()
