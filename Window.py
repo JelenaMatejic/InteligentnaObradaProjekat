@@ -77,13 +77,13 @@ class windowClass:
     def plotMulticlassOneVsAllPerceptron(self):
         fig = MulticlassOneVsAll.oneVsAllPerceptronExample()
         canvas = FigureCanvasTkAgg(fig, master=self.window)
-        canvas.get_tk_widget().pack()
+        canvas.get_tk_widget().grid(row = 5, columnspan=2)
         canvas.draw()
 
     def plotMulticlassOneVsAllLogisticRegression(self):
         fig = MulticlassOneVsAll.oneVsAllLogisticRegressionExample()
         canvas = FigureCanvasTkAgg(fig, master=self.window)
-        canvas.get_tk_widget().pack()
+        canvas.get_tk_widget().grid(row = 5, columnspan=2)
         canvas.draw()
 
 window= Tk()
