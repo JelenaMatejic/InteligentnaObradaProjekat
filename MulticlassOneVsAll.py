@@ -72,13 +72,4 @@ def oneVsAllLogisticRegressionExample():
 #oneVsAllLogisticRegressionExample()
 #oneVsAllPerceptronExample()
 
-# def plot_line(x_kord, w, b):
-#     #x_kord = [0, 4]
-#     y_kord = [-(w[0,0]/w[0,1])*i - (b[0,0]/w[0,1]) for i in x_kord]
-#     plt.plot(x_kord, y_kord)
-
-# plot_line([0,4], w[0]-w[1], b[0]-b[1])
-# plot_line([0,4], w[0]-w[2], b[0]-b[2])
-# plot_line([3.5, 8], w[1]-w[2], b[1]-b[2])
-# processDataPerClassLogisticRegression(t, 2)
 

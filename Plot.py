@@ -12,6 +12,7 @@ def listOfMarkers():
     markers = []
     for m in mark.MarkerStyle.markers:
         markers.append(m)
+    markers = markers[:-4] # Jer su poslednja 4 markera None ili ' '
     return markers
 
 def plotData(x, t):
@@ -20,12 +21,13 @@ def plotData(x, t):
     markers = listOfMarkers()
     # idemo po klasama i iscrtavamo podatke - podaci jedne klase imaju nasumicno odabranu boju i oblik (marker)
     for i in classes:
-        plt.scatter(x.T[0][t[0] == i], x.T[1][t[0] == i], marker=random.choice(markers))
+        m = random.choice(markers)
+        plt.scatter(x.T[0][t[0] == i], x.T[1][t[0] == i], marker=m)
 
 def lineCoordinates(x, w, b):
     xMax = max(x[:][:, 0])
     xMin = min(x[:][:, 0])
-    xCord = [xMin-1,xMax+1]  # zelim da hiperravan bude dovoljno duga i deli podatke od prvog do poslenjeg postojeceg podatka
+    xCord = [xMin-2,xMax+2]  # zelim da hiperravan bude dovoljno duga i deli podatke od prvog do poslenjeg postojeceg podatka
     yCord = [-(w[0, 0] / w[0, 1]) * x - (b[0, 0] / w[0, 1]) for x in xCord]  # odredimo y koordinate za prethodno odredjene x koordinate
     return [xCord, yCord]
 
@@ -37,14 +39,12 @@ def plotLinesMulticlassOneVsAll(x, t, listW, listB):
     labels = np.unique(t)
     for i in range(len(labels)):
         plotLineInWindow(x, listW[i], listB[i])
-    global a
-    global fig
+    global a, fig
     plotDataInWindow(x, t, a, fig)
     return fig
 
 def plotInWindow(x, w, b, t):
-    global a
-    global fig
+    global a, fig
     a, fig = plotLineInWindow(x, w, b)
     plotDataInWindow(x, t, a, fig)
     return fig
@@ -52,8 +52,7 @@ def plotInWindow(x, w, b, t):
 def plotLineInWindow(x, w, b):
     xCord, yCord = lineCoordinates(x, w, b)
 
-    global fig
-    global a
+    global a, fig
     a = fig.add_subplot(111)
     a.plot(xCord, yCord)
     return [a, fig]
@@ -66,7 +65,8 @@ def plotDataInWindow(x, t, a, fig):
     plt.draw()
     # idemo po klasama i iscrtavamo podatke - podaci jedne klase imaju nasumicno odabranu boju i oblik (marker)
     for i in classes:
-        a.scatter(x.T[0][t[0] == i], x.T[1][t[0] == i], marker=random.choice(markers))
+        m = random.choice(markers)
+        a.scatter(x.T[0][t[0] == i], x.T[1][t[0] == i], marker=m)
     return fig
 
 
