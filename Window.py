@@ -1,5 +1,6 @@
 import Perceptron
 import LogisticRegression
+import PassiveAggressiveAlgorithm
 import Plot
 import sys
 import MulticlassOneVsAll
@@ -24,7 +25,7 @@ class windowClass:
         self.buttonChooseFile = Button(window, text="Choose Fle", command=self.openFileDialog)
         self.buttonPerceptron = Button (window, text="Perceptron Algorithm", command=self.plotPerceptron, height = 1, width = 50)
         self.buttonLogisticRegression = Button (window, text="Logistic Regression Algorithm", command=self.plotLogisticRegression, height = 1, width = 50)
-        self.buttonPassiveAggressive = Button (window, text="Passive Aggressive Algorithm", command=self.plotLogisticRegression, height = 1, width = 50)
+        self.buttonPassiveAggressive = Button (window, text="Passive Aggressive Algorithm", command=self.plotPassiveAggressive, height = 1, width = 50)
         self.buttonMulticlassOneVsAllPerceptron = Button(window, text="One Vs All - Perceptron Algorithm", command=self.plotMulticlassOneVsAllPerceptron, height = 1, width = 50)
         self.buttonMulticlassOneVsAllLogisticRegression = Button(window, text="One Vs All - Logistic Regression algorithm",
                                                                  command=self.plotMulticlassOneVsAllLogisticRegression, height = 1, width = 50)
@@ -75,6 +76,15 @@ class windowClass:
         if file == "" or file == "No file chosen . . .":
             file = "./dataSets/LogisticRegressionDataSet.txt"
         fig = LogisticRegression.logisticRegressionPlotInWindow(file)
+        self.drawFigure(fig)
+
+    def plotPassiveAggressive(self):
+        Plot.fig = Figure()
+        file = self.labelForFile["text"]
+        self.labelTitle["text"] = "Passive Aggresive Algorithm"
+        if file == "" or file == "No file chosen . . .":
+            file = "./dataSets/PerceptronDataSet.txt"
+        fig = PassiveAggressiveAlgorithm.passiveAggressivePlotInWindow(file)
         self.drawFigure(fig)
 
     def plotMulticlassOneVsAllPerceptron(self):

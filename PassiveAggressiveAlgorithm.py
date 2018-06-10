@@ -97,4 +97,17 @@ def PassiveAggressiveAlgorithmExample():
     Plot.plotLine(x, w, b)
     plt.show()
 
+def passiveAggressivePlotInWindow(file):
+    data = ReadingFromFile.readDataFromFile(file, ',')  # Podaci ucitani iz fajla
+    trainingSet, testSet = CrossValidation.makeSets(data)  # Napravimo trening i test set
+    kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet, 5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
+
+    c = optC(kTrainingSets, kValidSets) # Podesimo optimalni parametar c
+    w, b = crossTrain(kTrainingSets, kValidSets, c)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
+    x, t = Initializing.processData(testSet)  # Rezultat crtamo i merimo nad test skupom podataka
+
+    fig = Plot.plotInWindow(x, w, b, t)
+    return fig
+
+#PassiveAggressiveAlgorithmExample()
 
