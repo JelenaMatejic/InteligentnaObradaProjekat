@@ -8,4 +8,3 @@ def readDataFromFile(fileName, splitChar):
         sample = [float(i) for i in sample]
         data.append(sample)
     return data
-
