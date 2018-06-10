@@ -69,6 +69,7 @@ def logisticRegressionExample():
 
     w, b = crossTrain(kTrainingSets, kValidSets)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
     x, t = Initializing.processData(testSet)  # Rezultat crtamo i merimo nad test skupom podataka
+    t = Initializing.checkLabels(t, "logistic")
     Plot.plotData(x, t)
     Plot.plotLine(x, w, b)
     plt.show()
@@ -80,6 +81,7 @@ def logisticRegressionPlotInWindow(file):
 
     w, b = crossTrain(kTrainingSets, kValidSets)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
     x, t = Initializing.processData(testSet)  # Rezultat crtamo i merimo nad test skupom podataka
+    t = Initializing.checkLabels(t, "logistic")
 
     fig = Plot.plotInWindow(x, w, b, t)
     return fig

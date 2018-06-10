@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 
-# Treniranje modela
 def train(x, t, w, b, epoha = 100, learnRate = 1):
     for e in range(epoha):
         for n in range(len(x)):
@@ -39,6 +38,7 @@ def perceptronExample(file):
     trainingSet, testSet = CrossValidation.makeSets(data)
 
     x, t = Initializing.processData(trainingSet)
+    t = Initializing.checkLabels(t, "perceptron")
     w, b = Initializing.initialParam(x)
     w, b = train(x, t, w, b)
     Plot.plotData(x, t)
@@ -51,6 +51,7 @@ def perceptronPlotInWindow(file):
     trainingSet, testSet = CrossValidation.makeSets(data)
 
     x, t = Initializing.processData(trainingSet)
+    t = Initializing.checkLabels(t, "perceptron")
     w, b = Initializing.initialParam(x)
     w, b = train(x, t, w, b)
 

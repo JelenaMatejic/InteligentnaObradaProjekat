@@ -7,6 +7,8 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+
 def loss(tn, w, xn):
     tmp = np.dot(w, xn.T)
     ln = 1 - np.dot(tn, tmp)
@@ -18,7 +20,7 @@ def lambd(ln, xn, c):
     l = min(c, tmp)
     return l
 
-def train(x, t, w, b, c, epohe = 100):
+def train(x, t, w, b, c, epohe = 15):
     for e in range(epohe):
         for n in range(len(x)):
             tn = np.array(t[0,n]).reshape((1, 1))
@@ -43,7 +45,7 @@ def sumLoss(kValidSets, w):
         sum += ln
     return sum
 
-def optC(kTrainingSets, kValidSets, cSet = [0.01, 0.1, 10, 100, 1000]):
+def optC(kTrainingSets, kValidSets, cSet = [0.001, 0.01, 0.1, 10, 100, 1000]):
     minLoss = math.inf # posto su gubici negativni, najmanji je onajkoji je najblizi nuli
     optimalC = cSet[0]
     for c in cSet:
@@ -93,6 +95,7 @@ def PassiveAggressiveAlgorithmExample():
     w, b = crossTrain(kTrainingSets, kValidSets, c)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
 
     x, t = Initializing.processData(testSet)  # Rezultat crtamo i merimo nad test skupom podataka
+    t = Initializing.checkLabels(t, "passiveAggressive")
     Plot.plotData(x, t)
     Plot.plotLine(x, w, b)
     plt.show()
@@ -105,6 +108,7 @@ def passiveAggressivePlotInWindow(file):
     c = optC(kTrainingSets, kValidSets) # Podesimo optimalni parametar c
     w, b = crossTrain(kTrainingSets, kValidSets, c)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
     x, t = Initializing.processData(testSet)  # Rezultat crtamo i merimo nad test skupom podataka
+    t = Initializing.checkLabels(t, "passiveAggressive")
 
     fig = Plot.plotInWindow(x, w, b, t)
     return fig

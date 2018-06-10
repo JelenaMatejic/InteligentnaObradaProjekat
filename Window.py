@@ -21,17 +21,17 @@ class windowClass:
         self.canvas = None
         self.window = window
         self.box = Entry(window)
-        self.labelForFile = Label(window, text = "No file chosen . . .", bg = "white", height=1, width=50,  anchor="e")
-        self.buttonChooseFile = Button(window, text="Choose Fle", command=self.openFileDialog)
-        self.buttonPerceptron = Button (window, text="Perceptron Algorithm", command=self.plotPerceptron, height = 1, width = 50)
-        self.buttonLogisticRegression = Button (window, text="Logistic Regression Algorithm", command=self.plotLogisticRegression, height = 1, width = 50)
-        self.buttonPassiveAggressive = Button (window, text="Passive Aggressive Algorithm", command=self.plotPassiveAggressive, height = 1, width = 50)
-        self.buttonMulticlassOneVsAllPerceptron = Button(window, text="One Vs All - Perceptron Algorithm", command=self.plotMulticlassOneVsAllPerceptron, height = 1, width = 50)
+        self.labelForFile = Label(window, text = "No file chosen . . .", bg = "white", height=1, width=50,  anchor="e", font=("Helvetica", 11))
+        self.buttonChooseFile = Button(window, text="Choose Fle", command=self.openFileDialog, font=("Helvetica", 11))
+        self.buttonPerceptron = Button (window, text="Perceptron Algorithm", command=self.plotPerceptron, height = 1, width = 50, font=("Helvetica", 11))
+        self.buttonLogisticRegression = Button (window, text="Logistic Regression Algorithm", command=self.plotLogisticRegression, height = 1, width = 50, font=("Helvetica", 11))
+        self.buttonPassiveAggressive = Button (window, text="Passive Aggressive Algorithm", command=self.plotPassiveAggressive, height = 1, width = 50, font=("Helvetica", 11))
+        self.buttonMulticlassOneVsAllPerceptron = Button(window, text="One Vs All - Perceptron Algorithm", command=self.plotMulticlassOneVsAllPerceptron, height = 1, width = 50, font=("Helvetica", 11))
         self.buttonMulticlassOneVsAllLogisticRegression = Button(window, text="One Vs All - Logistic Regression algorithm",
-                                                                 command=self.plotMulticlassOneVsAllLogisticRegression, height = 1, width = 50)
-        self.buttonPassiveAggressiveOneVsAllLogisticRegression = Button(window, text="One Vs All - Logistic Regression algorithm",
-                                                                 command=self.plotMulticlassOneVsAllLogisticRegression, height=1, width=50)
-        self.labelTitle = Label(window, text = "", bg = "white")
+                                                                 command=self.plotMulticlassOneVsAllLogisticRegression, height = 1, width = 50, font=("Helvetica", 11))
+        self.buttonPassiveAggressiveOneVsAllLogisticRegression = Button(window, text="One Vs All - Passive Aggressive algorithm",
+                                                                 command=self.plotMulticlassOneVsAllPassiveAggressive, height=1, width=50, font=("Helvetica", 11))
+        self.labelTitle = Label(window, text = "", bg = "white", font=("Helvetica", 14), pady = 5)
 
         self.labelForFile.grid(row=0, column=0)
         self.buttonChooseFile.grid(row=0, column=1, sticky=W)
@@ -109,9 +109,19 @@ class windowClass:
         canvas.get_tk_widget().grid(row = 5, columnspan=2)
         canvas.draw()
 
+    def plotMulticlassOneVsAllPassiveAggressive(self):
+        Plot.fig = Figure()
+        file = self.labelForFile["text"]
+        self.labelTitle["text"] = "Multiclass One Vs ALL -Logistic Regression Algorithm"
+        if file == "" or file == "No file chosen . . .":
+            file = "./dataSets/MulticlassOneVsAllDataSet.txt"
+        fig = MulticlassOneVsAll.oneVsAllPassiveAggressiveExample(file)
+        canvas = FigureCanvasTkAgg(fig, master=self.window)
+        canvas.get_tk_widget().grid(row = 5, columnspan=2)
+        canvas.draw()
 window= Tk()
 windowClass (window)
-window.geometry("720x600")
+window.geometry("920x620")
 window.configure(background='white')
 window.title("Classifiers")
 window.mainloop()
