@@ -1,10 +1,9 @@
-import Perceptron
-import LogisticRegression
-import PassiveAggressiveAlgorithm
-import Plot
-import sys
-import MulticlassOneVsAll
 import matplotlib
+
+import MulticlassOneVsAll
+import Plot
+from Algorithms import PassiveAggressiveAlgorithm, LogisticRegression, Perceptron
+
 matplotlib.use('TkAgg')
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import *

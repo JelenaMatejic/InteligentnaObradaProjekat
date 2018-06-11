@@ -8,3 +8,14 @@ def readDataFromFile(fileName, splitChar):
         sample = [float(i) for i in sample]
         data.append(sample)
     return data
+
+def checkFile(file, algorithm):
+    if file == "" or file == "No file chosen . . .":
+        if algorithm == "perceptron":
+            file = "../dataSets/PerceptronDataSet.txt"
+        elif algorithm == "logistic":
+            file = "../dataSets/LogisticRegressionDataSet.txt"
+        else:
+            filr = "./dataSets/PerceptronDataSet.txt"
+    return file
+

@@ -2,12 +2,9 @@ import ReadingFromFile
 import CrossValidation
 import Initializing
 import Plot
-import random
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-
-
 
 def loss(tn, w, xn):
     tmp = np.dot(w, xn.T)
@@ -35,9 +32,8 @@ def train(x, t, w, b, c, epohe = 15):
 
     return [w, b]
 
-def sumLoss(kValidSets, w):
+def sumLoss(xValid, tValid, w):
     sum = 0
-    xValid, tValid = Initializing.processData(kValidSets[0])
     for n in range(len(xValid)):
         tn = np.array(tValid[0,n]).reshape((1, 1))
         xn = np.array(xValid[n]).reshape((1, len(xValid[n])))
@@ -50,9 +46,10 @@ def optC(kTrainingSets, kValidSets, cSet = [0.001, 0.01, 0.1, 10, 100, 1000]):
     optimalC = cSet[0]
     for c in cSet:
         w, b = crossTrain(kTrainingSets, kValidSets, c)
-        sumL = sumLoss(kValidSets, w)
-        if minLoss < abs(sumL[0][0]):
-            minLoss = sumL
+        xValid, tValid = Initializing.processData(kValidSets[0])
+        sumL = sumLoss(xValid, tValid, w)
+        if minLoss > abs(sumL[0][0]):
+            minLoss = abs(sumL[0][0])
             optimalC = c
     return [optimalC]
 
@@ -69,36 +66,22 @@ def testResults(testSet, w, b, c):
     return tResult
 
 def crossTrain(kTrainingSets, kValidSets, c):
-
+    minLoss = math.inf
+    bestW = math.inf
+    bestB = math.inf
     for k in range(len(kTrainingSets)):
         # Trenirano parametre na k-tom trening set-u
         x, t = Initializing.processData(kTrainingSets[k])
+        xValid, tValid = Initializing.processData(kValidSets[k])
         w, b = Initializing.initialParam(x)
         w, b = train(x, t, w, b, c)
+        kLoss = sumLoss(xValid, tValid, w) # Merino gresku na k-tom validacionom set-u, za dobijene parametre w i t
+        if minLoss > abs(kLoss[0][0]):
+            minLoss = abs(kLoss[0][0])
+            bestW = w
+            bestB = b
 
-        # # Merino gresku na k-tom validacionom set-u, za dobijene parametre w i t
-        # xValid, tValid = Initializing.processData(kValidSets[k])
-        # kLoss = cost(xValid, tValid, w, b)
-        # #print(kLoss)
-        # minCost(w, b, kLoss)
-
-    # Nakon unakrsnog treninga i validacije, vratimo najbolje parametra w i b, nad kojima cemo testirati
-    # global bestW, bestB
-    # return [bestW, bestB]
-    return [w, b]
-
-def PassiveAggressiveAlgorithmExample():
-    data = ReadingFromFile.readDataFromFile('./dataSets/PerceptronDataSet.txt', ',')
-    trainingSet, testSet = CrossValidation.makeSets(data)  # Napravimo trening i test set
-    kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet,5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
-    c = optC(kTrainingSets, kValidSets)
-    w, b = crossTrain(kTrainingSets, kValidSets, c)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
-
-    x, t = Initializing.processData(testSet)  # Rezultat crtamo i merimo nad test skupom podataka
-    t = Initializing.checkLabels(t, "passiveAggressive")
-    Plot.plotData(x, t)
-    Plot.plotLine(x, w, b)
-    plt.show()
+    return [bestW, bestB]
 
 def passiveAggressivePlotInWindow(file):
     data = ReadingFromFile.readDataFromFile(file, ',')  # Podaci ucitani iz fajla
@@ -113,5 +96,4 @@ def passiveAggressivePlotInWindow(file):
     fig = Plot.plotInWindow(x, w, b, t)
     return fig
 
-#PassiveAggressiveAlgorithmExample()
 

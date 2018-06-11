@@ -1,5 +1,4 @@
 import random
-import ReadingFromFile
 
 # U Cross Validaciji data set izaberemo na slucajan nacin
 # Potom taj skup podataka podelimo u tri dela

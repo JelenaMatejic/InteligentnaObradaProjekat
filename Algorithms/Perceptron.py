@@ -4,7 +4,6 @@ import Initializing
 import Plot
 import matplotlib.pyplot as plt
 import numpy as np
-import math
 
 def train(x, t, w, b, epoha = 100, learnRate = 1):
     for e in range(epoha):
@@ -33,19 +32,6 @@ def predict(testSet, w, b):
     predictSet[predictSet <= 0] = -1
     return predictSet
 
-def perceptronExample(file):
-    data = ReadingFromFile.readDataFromFile(file, ',') # Podaci ucitani iz fajla
-    trainingSet, testSet = CrossValidation.makeSets(data)
-
-    x, t = Initializing.processData(trainingSet)
-    t = Initializing.checkLabels(t, "perceptron")
-    w, b = Initializing.initialParam(x)
-    w, b = train(x, t, w, b)
-    Plot.plotData(x, t)
-    Plot.plotLine(x, w, b)
-    plt.show()
-
-
 def perceptronPlotInWindow(file):
     data = ReadingFromFile.readDataFromFile(file, ',')  # Podaci ucitani iz fajla
     trainingSet, testSet = CrossValidation.makeSets(data)
@@ -58,5 +44,3 @@ def perceptronPlotInWindow(file):
     xTest, tTest = Initializing.processData(testSet)
     fig = Plot.plotInWindow(xTest, w, b, tTest)
     return fig
-
-#perceptronExample(""./dataSets/PerceptronDataSet.txt"")
