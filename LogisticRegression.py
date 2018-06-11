@@ -30,9 +30,7 @@ def cost(x, t, w, b):
     return np.sum(loss)
 
 def minCost(w, b, loss):
-    global minLoss
-    global bestW
-    global bestB
+    global minLoss, bestW, bestB
     if minLoss > loss:
         minLoss = loss
         bestW = w
@@ -45,7 +43,10 @@ def predict(new_x, w, b):
     return out
 
 def crossTrain(kTrainingSets, kValidSets):
-
+    global bestW, bestB, minLoss
+    bestW = math.inf
+    bestB = math.inf
+    minLoss = math.inf
     for k in range(len(kTrainingSets)):
         # Trenirano parametre na k-tom trening set-u
         x, t = Initializing.processData(kTrainingSets[k])
@@ -55,11 +56,9 @@ def crossTrain(kTrainingSets, kValidSets):
         # Merino gresku na k-tom validacionom set-u, za dobijene parametre w i t
         xValid, tValid = Initializing.processData(kValidSets[k])
         kLoss = cost(xValid, tValid, w, b)
-        #print(kLoss)
         minCost(w, b, kLoss)
 
     # Nakon unakrsnog treninga i validacije, vratimo najbolje parametra w i b, nad kojima cemo testirati
-    global bestW, bestB
     return [bestW, bestB]
 
 def logisticRegressionExample():

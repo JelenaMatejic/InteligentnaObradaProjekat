@@ -10,6 +10,7 @@ import matplotlib.markers as mark
 import matplotlib.pyplot as plt
 import random
 import copy
+import math
 
 def processDataPerClass(t, classId, algorithm):
     if algorithm == 'logistic':
@@ -40,6 +41,9 @@ def processDataSetPerClass(data, classId, algorithm):
     return tmpData
 
 def trainClassifiers(data, algorithm):
+    #data = [[1,1,0], [1,2,0], [5,5,1], [4,5,1], [-5,-4,2], [-5,-5,2]]
+    print(data)
+    print()
     x, t = Initializing.processData(data)
     labels = np.unique(t)
     listW = []
@@ -47,12 +51,13 @@ def trainClassifiers(data, algorithm):
     for i in range(len(labels)):
         tmpData = processDataSetPerClass(data, i, algorithm)
         tmpX, tmpT = Initializing.processData(tmpData)
-        w, b = Initializing.initialParam(x)
+        w, b = Initializing.initialParam(tmpX)
         if algorithm == 'perceptron':
             w, b = Perceptron.train(tmpX, tmpT, w, b)
         elif algorithm == 'logistic':
-            #w, b = LogisticRegression.train(tmpX, tmpT, w, b)
-
+            # w, b = LogisticRegression.train(tmpX, tmpT, w, b)
+            LogisticRegression.bestW, LogisticRegression.bestB = Initializing.initialParam(tmpX)
+            print(LogisticRegression.bestW, LogisticRegression.bestB)
             trainingSet, testSet = CrossValidation.makeSets(tmpData)  # Napravimo trening i test set
             kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet, 5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
             w, b = LogisticRegression.crossTrain(kTrainingSets,kValidSets)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
@@ -63,6 +68,9 @@ def trainClassifiers(data, algorithm):
             w, b = PassiveAggressiveAlgorithm.crossTrain(kTrainingSets, kValidSets, c)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
         listW.append(np.array(w[0]).reshape(1,len(w[0])))
         listB.append(np.array(b[0]).reshape(1,1))
+        print(w, b)
+        print(LogisticRegression.bestW, LogisticRegression.bestB)
+        print()
     return [listW, listB]
 
 def oneVsAllPerceptronExample(file):
