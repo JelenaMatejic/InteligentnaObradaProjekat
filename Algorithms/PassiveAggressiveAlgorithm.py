@@ -1,5 +1,4 @@
-import ReadingFromFile
-import CrossValidation
+from Plotting import PlotInWindow
 import Initializing
 import Plot
 import math
@@ -54,11 +53,11 @@ def optC(kTrainingSets, kValidSets, cSet = [0.001, 0.01, 0.1, 10, 100, 1000]):
     return [optimalC]
 
 def testResults(testSet, w, b, c):
-    t = labels(testSet)
+    xTest, tTest = Initializing.processData(testSet)
     tResult = []
-    for n in range(len(testSet)):
-        tn = np.array(t[n]).reshape((1, 1))
-        xn = np.array(testSet[n][:-1]).reshape((1, len(testSet[n]) - 1))
+    for n in range(len(xTest)):
+        tn = np.array(tTest[n]).reshape((1, 1))
+        xn = np.array(xTest[n]).reshape((1, len(xTest[n])))
         if (np.dot(w, xn.T) + b) > 0:
             tResult.append(1)
         else:
@@ -84,16 +83,7 @@ def crossTrain(kTrainingSets, kValidSets, c):
     return [bestW, bestB]
 
 def passiveAggressivePlotInWindow(file):
-    data = ReadingFromFile.readDataFromFile(file, ',')  # Podaci ucitani iz fajla
-    trainingSet, testSet = CrossValidation.makeSets(data)  # Napravimo trening i test set
-    kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet, 5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
-
-    c = optC(kTrainingSets, kValidSets) # Podesimo optimalni parametar c
-    w, b = crossTrain(kTrainingSets, kValidSets, c)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
-    x, t = Initializing.processData(testSet)  # Rezultat crtamo i merimo nad test skupom podataka
-    t = Initializing.checkLabels(t, "passiveAggressive")
-
-    fig = Plot.plotInWindow(x, w, b, t)
+    fig = PlotInWindow.plotAlgorithmInWindow(file, "passiveAggressive")
     return fig
 
 
