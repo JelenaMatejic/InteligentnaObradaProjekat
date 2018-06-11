@@ -1,16 +1,15 @@
-import CrossValidation
 import Initializing
 import ReadingFromFile
-from Algorithms import Perceptron, LogisticRegression, PassiveAggressiveAlgorithm
+from Algorithms import Perceptron, LogisticRegression, PassiveAggressiveAlgorithm, CrossValidation
 from Plotting import PlotInWindow
-from matplotlib.figure import Figure
+
 
 def plotAlgorithmInWindow(file, algorithm):
     data = ReadingFromFile.readDataFromFile(file, ',')  # Podaci ucitani iz fajla
     trainingSet, testSet = CrossValidation.makeSets(data)
     x, t = Initializing.processData(trainingSet)
     t = Initializing.checkLabels(t, algorithm)
-    kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet,5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
+    kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet, 5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
 
     if algorithm == "perceptron":
         w, b = Initializing.initialParam(x)

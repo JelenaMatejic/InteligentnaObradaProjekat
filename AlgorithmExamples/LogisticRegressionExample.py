@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 
 import Algorithms.LogisticRegression as LogisticRegression
-import CrossValidation
 import Initializing
 import ReadingFromFile
+from Algorithms import CrossValidation
 from Plotting import Plot
 
 

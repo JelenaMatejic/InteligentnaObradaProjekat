@@ -2,10 +2,9 @@ import copy
 
 import numpy as np
 
-import CrossValidation
 import Initializing
 import ReadingFromFile
-from Algorithms import PassiveAggressiveAlgorithm, LogisticRegression, Perceptron
+from Algorithms import PassiveAggressiveAlgorithm, LogisticRegression, Perceptron, CrossValidation
 from Plotting import PlotInWindow
 
 
@@ -56,7 +55,7 @@ def trainClassifiers(data, algorithm):
             w, b = LogisticRegression.crossTrain(kTrainingSets, kValidSets)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
         else:
             trainingSet, testSet = CrossValidation.makeSets(tmpData)  # Napravimo trening i test set
-            kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet,5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
+            kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet, 5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
             c = PassiveAggressiveAlgorithm.optC(kTrainingSets, kValidSets)  # Podesimo optimalni parametar c
             w, b = PassiveAggressiveAlgorithm.crossTrain(kTrainingSets, kValidSets, c)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
         listW.append(np.array(w[0]).reshape(1,len(w[0])))

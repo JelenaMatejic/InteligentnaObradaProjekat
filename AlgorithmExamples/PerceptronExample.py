@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 
 import Algorithms.Perceptron as Perceptron
-import CrossValidation
 import Initializing
 import ReadingFromFile
+from Algorithms import CrossValidation
 from Plotting import Plot
 
 

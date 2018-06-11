@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 
 import Algorithms.PassiveAggressiveAlgorithm as PassiveAggressiveAlgorithm
-import CrossValidation
 import Initializing
 import ReadingFromFile
+from Algorithms import CrossValidation
 from Plotting import Plot
 
 
@@ -11,7 +11,7 @@ def PassiveAggressiveAlgorithmExample(file):
     file = ReadingFromFile.checkFile(file, "passiveAggressive")
     data = ReadingFromFile.readDataFromFile(file, ',')
     trainingSet, testSet = CrossValidation.makeSets(data)  # Napravimo trening i test set
-    kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet,5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
+    kTrainingSets, kValidSets = CrossValidation.kCrossValidationMakeSets(trainingSet, 5)  # Napravimo k trening i test set-ova unakrsnom validacijom (k = 5)
     c = PassiveAggressiveAlgorithm.optC(kTrainingSets, kValidSets)
     w, b = PassiveAggressiveAlgorithm.crossTrain(kTrainingSets, kValidSets, c)  # Istreniramo k trening setova i kao rezultat vratimo najbolje w i najbolje b  (ono w i b za koje je greska bila najmanja)
 
