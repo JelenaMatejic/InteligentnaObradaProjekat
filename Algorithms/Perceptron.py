@@ -1,8 +1,5 @@
-import CrossValidation
-import ReadingFromFile
 import Initializing
-import Plot
-import matplotlib.pyplot as plt
+from Plotting import PlotInWindow
 import numpy as np
 
 def train(x, t, w, b, epoha = 100, learnRate = 1):
@@ -33,14 +30,5 @@ def predict(testSet, w, b):
     return predictSet
 
 def perceptronPlotInWindow(file):
-    data = ReadingFromFile.readDataFromFile(file, ',')  # Podaci ucitani iz fajla
-    trainingSet, testSet = CrossValidation.makeSets(data)
-
-    x, t = Initializing.processData(trainingSet)
-    t = Initializing.checkLabels(t, "perceptron")
-    w, b = Initializing.initialParam(x)
-    w, b = train(x, t, w, b)
-
-    xTest, tTest = Initializing.processData(testSet)
-    fig = Plot.plotInWindow(xTest, w, b, tTest)
+    fig = PlotInWindow.plotAlgorithmInWindow(file, "perceptron")
     return fig
