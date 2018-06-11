@@ -1,9 +1,11 @@
-import ReadingFromFile
-import Initializing
-import Plot
-import CrossValidation
-import Algorithms.PassiveAggressiveAlgorithm as PassiveAggressiveAlgorithm
 import matplotlib.pyplot as plt
+
+import Algorithms.PassiveAggressiveAlgorithm as PassiveAggressiveAlgorithm
+import CrossValidation
+import Initializing
+import ReadingFromFile
+from Plotting import Plot
+
 
 def PassiveAggressiveAlgorithmExample(file):
     file = ReadingFromFile.checkFile(file, "passiveAggressive")

@@ -1,9 +1,11 @@
-import ReadingFromFile
+import matplotlib.pyplot as plt
+
+import Algorithms.LogisticRegression as LogisticRegression
 import CrossValidation
 import Initializing
-import Plot
-import Algorithms.LogisticRegression as LogisticRegression
-import matplotlib.pyplot as plt
+import ReadingFromFile
+from Plotting import Plot
+
 
 def logisticRegressionExample(file):
     file = ReadingFromFile.checkFile(file, "logistic")

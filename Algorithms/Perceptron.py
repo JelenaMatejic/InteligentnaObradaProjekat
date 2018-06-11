@@ -1,5 +1,5 @@
 import Initializing
-from Plotting import PlotInWindow
+from Plotting import PlottingAlgorithm
 import numpy as np
 
 def train(x, t, w, b, epoha = 100, learnRate = 1):
@@ -30,5 +30,5 @@ def predict(testSet, w, b):
     return predictSet
 
 def perceptronPlotInWindow(file):
-    fig = PlotInWindow.plotAlgorithmInWindow(file, "perceptron")
+    fig = PlottingAlgorithm.plotAlgorithmInWindow(file, "perceptron")
     return fig

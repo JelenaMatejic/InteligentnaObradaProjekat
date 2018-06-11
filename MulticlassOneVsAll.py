@@ -4,9 +4,9 @@ import numpy as np
 
 import CrossValidation
 import Initializing
-import Plot
 import ReadingFromFile
 from Algorithms import PassiveAggressiveAlgorithm, LogisticRegression, Perceptron
+from Plotting import PlotInWindow
 
 
 def processDataPerClass(t, classId, algorithm):
@@ -69,7 +69,7 @@ def oneVsAllPerceptronExample(file):
     x, t = Initializing.processData(data)  # iz pocetnog skupa podataka razdvojimo podatke i labele
     listW, listB = trainClassifiers(data, "perceptron")
 
-    fig = Plot.plotLinesMulticlassOneVsAll(x, t, listW, listB)
+    fig = PlotInWindow.plotLinesMulticlassOneVsAll(x, t, listW, listB)
     return fig
 
 def oneVsAllLogisticRegressionExample(file):
@@ -78,7 +78,7 @@ def oneVsAllLogisticRegressionExample(file):
     x, t = Initializing.processData(data)  # iz pocetnog skupa podataka razdvojimo podatke i labele
     listW, listB = trainClassifiers(data, "logistic")
 
-    fig = Plot.plotLinesMulticlassOneVsAll(x, t, listW, listB)
+    fig = PlotInWindow.plotLinesMulticlassOneVsAll(x, t, listW, listB)
     return fig
 
 def oneVsAllPassiveAggressiveExample(file):
@@ -87,7 +87,7 @@ def oneVsAllPassiveAggressiveExample(file):
     x, t = Initializing.processData(data)  # iz pocetnog skupa podataka razdvojimo podatke i labele
     listW, listB = trainClassifiers(data, "passiveAgressive")
 
-    fig = Plot.plotLinesMulticlassOneVsAll(x, t, listW, listB)
+    fig = PlotInWindow.plotLinesMulticlassOneVsAll(x, t, listW, listB)
     return fig
 
 #oneVsAllLogisticRegressionExample()

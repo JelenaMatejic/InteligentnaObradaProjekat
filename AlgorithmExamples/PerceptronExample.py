@@ -1,9 +1,11 @@
+import matplotlib.pyplot as plt
+
 import Algorithms.Perceptron as Perceptron
-import ReadingFromFile
 import CrossValidation
 import Initializing
-import Plot
-import matplotlib.pyplot as plt
+import ReadingFromFile
+from Plotting import Plot
+
 
 def perceptronExample(file):
     file = ReadingFromFile.checkFile(file, "perceptron")

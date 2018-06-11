@@ -1,5 +1,5 @@
 import Initializing
-from Plotting import PlotInWindow
+from Plotting import PlottingAlgorithm
 import numpy as np
 import math
 
@@ -59,6 +59,6 @@ def crossTrain(kTrainingSets, kValidSets):
     return [bestW, bestB]
 
 def logisticRegressionPlotInWindow(file):
-    fig = PlotInWindow.plotAlgorithmInWindow(file, "logistic")
+    fig = PlottingAlgorithm.plotAlgorithmInWindow(file, "logistic")
     return fig
 

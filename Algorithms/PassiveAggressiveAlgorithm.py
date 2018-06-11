@@ -1,9 +1,10 @@
-from Plotting import PlotInWindow
-import Initializing
-import Plot
 import math
+
 import numpy as np
-import matplotlib.pyplot as plt
+
+import Initializing
+from Plotting import PlottingAlgorithm
+
 
 def loss(tn, w, xn):
     tmp = np.dot(w, xn.T)
@@ -83,7 +84,7 @@ def crossTrain(kTrainingSets, kValidSets, c):
     return [bestW, bestB]
 
 def passiveAggressivePlotInWindow(file):
-    fig = PlotInWindow.plotAlgorithmInWindow(file, "passiveAggressive")
+    fig = PlottingAlgorithm.plotAlgorithmInWindow(file, "passiveAggressive")
     return fig
 
 

@@ -1,14 +1,15 @@
 import matplotlib
 
 import MulticlassOneVsAll
-import Plot
 from Algorithms import PassiveAggressiveAlgorithm, LogisticRegression, Perceptron
+from Plotting import Plot, PlottingAlgorithm, PlotInWindow
 
 matplotlib.use('TkAgg')
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import *
 from tkinter import filedialog
 from matplotlib.figure import Figure
+
 
 # root.title("Multiclass One VS All")
 # perceptronButton = Button(root, text = "Perceptron example", command = Perceptron.perceptronExample).pack()
@@ -57,10 +58,10 @@ class windowClass:
             self.canvas = FigureCanvasTkAgg(fig, master=self.window)
             self.canvas.get_tk_widget().grid(row = 5, columnspan=2)
             self.canvas.draw()
-        Plot.fig = Figure()
+        PlotInWindow.fig = Figure()
 
     def plotPerceptron (self):
-        Plot.fig = Figure()
+        PlotInWindow.fig = Figure()
         file = self.labelForFile["text"]
         self.labelTitle["text"] = "Perceptron Algorithm"
         if file == "" or file == "No file chosen . . .":
@@ -69,7 +70,7 @@ class windowClass:
         self.drawFigure(fig)
 
     def plotLogisticRegression(self):
-        Plot.fig = Figure()
+        PlotInWindow.fig = Figure()
         file = self.labelForFile["text"]
         self.labelTitle["text"] = "Logistic Regression Algorithm"
         if file == "" or file == "No file chosen . . .":
@@ -78,7 +79,7 @@ class windowClass:
         self.drawFigure(fig)
 
     def plotPassiveAggressive(self):
-        Plot.fig = Figure()
+        PlotInWindow.fig = Figure()
         file = self.labelForFile["text"]
         self.labelTitle["text"] = "Passive Aggresive Algorithm"
         if file == "" or file == "No file chosen . . .":
@@ -87,7 +88,7 @@ class windowClass:
         self.drawFigure(fig)
 
     def plotMulticlassOneVsAllPerceptron(self):
-        Plot.fig = Figure()
+        PlotInWindow.fig = Figure()
         file = self.labelForFile["text"]
         self.labelTitle["text"] = "Multiclass One Vs ALL - Perceptron Algorithm"
         if file == "" or file == "No file chosen . . .":
@@ -98,7 +99,7 @@ class windowClass:
         canvas.draw()
 
     def plotMulticlassOneVsAllLogisticRegression(self):
-        Plot.fig = Figure()
+        PlotInWindow.fig = Figure()
         file = self.labelForFile["text"]
         self.labelTitle["text"] = "Multiclass One Vs ALL -Logistic Regression Algorithm"
         if file == "" or file == "No file chosen . . .":
@@ -109,7 +110,7 @@ class windowClass:
         canvas.draw()
 
     def plotMulticlassOneVsAllPassiveAggressive(self):
-        Plot.fig = Figure()
+        PlotInWindow.fig = Figure()
         file = self.labelForFile["text"]
         self.labelTitle["text"] = "Multiclass One Vs ALL -Logistic Regression Algorithm"
         if file == "" or file == "No file chosen . . .":
