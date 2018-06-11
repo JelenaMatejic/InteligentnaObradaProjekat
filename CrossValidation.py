@@ -1,10 +1,11 @@
 import random
 
-# U Cross Validaciji data set izaberemo na slucajan nacin
-# Potom taj skup podataka podelimo u tri dela
-# Trening skup - 60% od data set-a (3/5 od data set-a)
-# Validacioni skup - 20% od data set-a (1/5 od data set-a)
-# Test skup - 20% od data set-a (1/5 od data set-a)
+# Izmesamo pocetni skup podataka (data)
+# 80% podataka ovog skupa nam je trening skup podataka
+# 20% podataka ovog skupa je test skup podataka
+# Od trening skupa podataka pravimo k skupva za treniranje i validaciju
+# Podelimo data skup na k podskupova (delova) i idemo redom.
+# U sakom prolazu tekuci podskup predstavlja test skup podataka, a preostali podskupovi cine trening skup podataka
 
 def makeSets(data):
     data = random.sample(data, len(data))
@@ -32,6 +33,3 @@ def kCrossValidationMakeSets(trainingSet, k):
         kTrainingSets.append(train)
 
     return [kTrainingSets, kValidSets]
-
-#data = ReadingFromFile.readDataFromFile("./dataSets/PerceptronDataSet.txt", ',')
-#kCrossValidationMakeSets(data, 3)

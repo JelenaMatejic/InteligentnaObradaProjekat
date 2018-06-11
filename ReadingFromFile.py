@@ -12,10 +12,12 @@ def readDataFromFile(fileName, splitChar):
 def checkFile(file, algorithm):
     if file == "" or file == "No file chosen . . .":
         if algorithm == "perceptron":
-            file = "../dataSets/PerceptronDataSet.txt"
+            file = "./dataSets/PerceptronDataSet.txt"
         elif algorithm == "logistic":
-            file = "../dataSets/LogisticRegressionDataSet.txt"
+            file = "./dataSets/LogisticRegressionDataSet.txt"
+        elif algorithm == "passiveAggressive":
+            file = "./dataSets/PerceptronDataSet.txt"
         else:
-            filr = "./dataSets/PerceptronDataSet.txt"
+            file = "./dataSets/MulticlassOneVsAllDataSet.txt"
     return file
 

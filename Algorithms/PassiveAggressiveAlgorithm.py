@@ -1,7 +1,5 @@
 import math
-
 import numpy as np
-
 import Initializing
 from Plotting import PlottingAlgorithm
 

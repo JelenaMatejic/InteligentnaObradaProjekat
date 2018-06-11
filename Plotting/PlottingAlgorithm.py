@@ -2,7 +2,8 @@ import CrossValidation
 import Initializing
 import ReadingFromFile
 from Algorithms import Perceptron, LogisticRegression, PassiveAggressiveAlgorithm
-from Plotting import Plot, PlotInWindow
+from Plotting import PlotInWindow
+from matplotlib.figure import Figure
 
 def plotAlgorithmInWindow(file, algorithm):
     data = ReadingFromFile.readDataFromFile(file, ',')  # Podaci ucitani iz fajla
